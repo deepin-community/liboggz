@@ -1,0 +1,4 @@
+# these are not RFCs (but quote the RFC license text)
+license-problem-non-free-RFC include/oggz/oggz.h
+license-problem-non-free-RFC doc/liboggz/html/group__basics.html
+license-problem-non-free-RFC doc/liboggz/latex/group__basics.tex

@@ -1,0 +1,3 @@
+usr/share/doc/liboggz/html/*
+usr/share/doc/liboggz/latex/*
+usr/lib/*/liboggz.la

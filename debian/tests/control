@@ -1,0 +1,3 @@
+Tests: test-oggz-info
+Depends: @, vorbis-tools, valgrind
+Restrictions: allow-stderr

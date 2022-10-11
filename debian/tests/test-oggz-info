@@ -1,0 +1,41 @@
+#!/bin/sh
+#
+# make sure oggz-info can extract information
+
+RETVAL=0
+
+set -e
+set -x
+
+at_exit() {
+    set +x
+    echo "info: test exiting, removing $WORKDIR"
+    rm -rf $WORKDIR
+}
+WORKDIR=$(mktemp -d)
+trap at_exit INT TERM EXIT
+set -x
+
+cd $WORKDIR
+
+if type valgrind >/dev/null 2>&1 ; then
+    VALGRIND=valgrind
+fi
+
+OGGZINFO=oggz-info
+if [ -x ${BUILDDIR}/src/tools/oggz-info ] ; then
+    OGGZINFO=${BUILDDIR}/src/tools/oggz-info
+fi
+
+head -c 500000 /dev/zero | oggenc -Q -r -o 1.ogg -
+
+if $VALGRIND $OGGZINFO 1.ogg ; then
+    echo "success: oggzinfo worked"
+else
+    echo "error: oggzinfo didn't work."
+    RETVAL=1
+fi
+
+rm -f 1.ogg
+
+exit $RETVAL
